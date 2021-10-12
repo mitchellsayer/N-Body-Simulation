@@ -1,0 +1,8 @@
+{
+    "dt": 1E5,
+    "t_max": 1E7,
+    "num_bodies": 100,
+    "body_mass": 5.97E+24,
+    "spawn_radius": 4E7,
+    "softening_constant": 1E3
+}
