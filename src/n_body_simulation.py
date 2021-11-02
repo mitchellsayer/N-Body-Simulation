@@ -20,9 +20,9 @@ def setupMatplotlib():
     ax = fig.add_subplot(111, projection='3d')
     title = ax.set_title("N-Body Simulation")
 
-    lim = [-3E11,3E11]
-    ax.set_xlim(lim)
-    ax.set_ylim(lim)
+    # lim = [-3E11,3E11]
+    # ax.set_xlim(lim)
+    # ax.set_ylim(lim)
     ax.set_xlabel('x')
     ax.set_ylabel('y')
     ax.set_zlabel('z')
@@ -76,15 +76,19 @@ def simulate(points, tMax, dt):
     return sim_data, velocities
 
 def main():
-    cfg = parseConfig('config.json')
-    fig, ax, title = setupMatplotlib()
+    # Parse cfg
+    cfg = parseConfig('../config.json')
 
     tMax = cfg['t_max']
     dt = cfg['dt']
+    num_bodies = cfg['num_bodies']
+    spawn_radius = cfg['spawn_radius']
+    softening_constant = cfg['softening_constant']
+    body_mass = cfg['body_mass']
 
-    # points = getSpawnPoints(cfg['num_bodies'], cfg['spawn_radius'], cfg['body_mass'])
-    # points = fibonacci_sphere(cfg['num_bodies'], cfg['spawn_radius'], cfg['body_mass'])
-    points = solar_system()
+    # points = getSpawnPoints(num_bodies, spawn_radius, body_mass)
+    points = fibonacci_sphere(num_bodies, spawn_radius, body_mass)
+    # points = solar_system()
 
     x_data, y_data, z_data = [], [], []
 
@@ -93,6 +97,7 @@ def main():
         y_data.append(point.pos[1])
         z_data.append(point.pos[2])
 
+    fig, ax, title = setupMatplotlib()
     graph = ax.scatter(x_data, y_data, z_data)
     sim_data, velocities = simulate(points, tMax, dt)
 

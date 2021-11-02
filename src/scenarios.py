@@ -1,4 +1,16 @@
 from planet import Body
+import random
+import numpy as np
+
+def discGalaxy(num_bodies, spawn_radius, mass):
+    bodies = []
+    a = spawn_radius * np.array([1, 1, 0.3])
+
+    for i in range(num_bodies):
+
+        pos = spawn_radius * np.ones(3)
+
+        np.random.rand(3)
 
 def getSpawnPoints(num_bodies, spawn_radius, mass):
     points = []
@@ -9,7 +21,7 @@ def getSpawnPoints(num_bodies, spawn_radius, mass):
         rand_z = random.uniform(-spawn_radius,spawn_radius)
 
         pos = [rand_x, rand_y, rand_z]
-        vel = [0,0,0]
+        vel = np.zeros(3)
         points.append(Body(pos, vel, mass))
 
     return points
